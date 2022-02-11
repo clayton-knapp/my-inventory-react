@@ -26,6 +26,14 @@ export async function fetchSingleEquipmentItem(id) {
   return checkError(response);
 }
 
+export async function deleteEquipment(id) {
+  const response = await client
+    .from('equipment')
+    .delete()
+    .match({ id: id });
+  
+  return checkError(response);
+}
 
 
 

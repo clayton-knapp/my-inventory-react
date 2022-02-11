@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchSingleEquipmentItem } from '../services/fetch-utils';
+import { fetchSingleEquipmentItem, deleteEquipment } from '../services/fetch-utils';
 
 export default function DetailPage() {
   const params = useParams();
+  const history = useHistory();
 
   const [equipmentItem, setEquipmentItem] = useState('');
 
@@ -24,6 +25,14 @@ export default function DetailPage() {
     window.open(equipmentItem.url);
   }
 
+  async function handleDelete() {
+    await deleteEquipment(params.id);
+
+    history.push('/');
+
+
+  }
+
   return (
     <div className='detail-page'>
       <div className='detail-container'>
@@ -41,7 +50,9 @@ export default function DetailPage() {
         >URL: {equipmentItem.url}</h4>
       </div>
       <button>Update this entry</button>
-      <button>Delete this entry</button>
+      <button
+        onClick={handleDelete}
+      >Delete this entry</button>
 
 
     </div>
