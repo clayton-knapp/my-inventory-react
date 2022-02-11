@@ -114,3 +114,8 @@
 .detail-page button {
   margin: 10px;
 }
+
+
+.active-class {
+  background-color: lightblue;
+}

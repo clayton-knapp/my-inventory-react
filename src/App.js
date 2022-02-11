@@ -40,10 +40,14 @@ function App() {
           {
             user && <ul style={{ listStyle: 'none' }}>
               <li>
-                <NavLink to='/'>List Page</NavLink>
+                <NavLink to='/list'
+                  activeClassName='active-class'
+                >List Page</NavLink>
               </li>
               <li>
-                <NavLink to='/create'>Create Page</NavLink>
+                <NavLink to='/create'
+                  activeClassName='active-class'
+                >Create Page</NavLink>
               </li>
               <button
                 onClick={handleLogout}
