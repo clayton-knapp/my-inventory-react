@@ -44,7 +44,7 @@ export default function UpdatePage() {
   }, [params.id]);
   
 
-  async function handleCreateSubmit(e) {
+  async function handleUpdateSubmit(e) {
     e.preventDefault();
 
     const equipment = {
@@ -73,7 +73,7 @@ export default function UpdatePage() {
     <div className='create-update-page'>
       <h2>Update a Piece of Equipment</h2>
       <Form 
-        handleSubmit={handleCreateSubmit}
+        handleSubmit={handleUpdateSubmit}
         setName={setName}
         setMake={setMake}
         setModel={setModel}
