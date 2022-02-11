@@ -93,3 +93,24 @@
 .create-form button {
   width: 200px;
 }
+
+.url {
+  cursor: pointer;
+}
+
+.detail-container {
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.detail-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-page button {
+  margin: 10px;
+}

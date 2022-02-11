@@ -16,6 +16,15 @@ export async function createEquipment(equipment) {
   return checkError(response);
 }
 
+export async function fetchSingleEquipmentItem(id) {
+  const response = await client
+    .from('equipment')
+    .select()
+    .match({ id: id })
+    .single();
+
+  return checkError(response);
+}
 
 
 
