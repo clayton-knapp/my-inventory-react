@@ -1,12 +1,16 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
-import { fetchSingleEquipmentItem, deleteEquipment, createReview } from '../services/fetch-utils';
+import { fetchSingleEquipmentItem, deleteEquipment, createReview, deleteReviewsForAnItem } from '../services/fetch-utils';
 import Review from '../components/Review';
 
-export default function DetailPage() {
+export default function DetailPage({ user }) {
   const params = useParams();
   const history = useHistory();
+
+  //user info passed down as prop from APP from token but is string so must parse back to object
+  const userObj = JSON.parse(user);
+  // console.log(userObj.currentSession.user.id);
 
   const [equipmentItem, setEquipmentItem] = useState('');
   const [review, setReview] = useState('');
@@ -35,6 +39,7 @@ export default function DetailPage() {
   }
 
   async function handleDelete() {
+    await deleteReviewsForAnItem(params.id);
     await deleteEquipment(params.id);
 
     history.push('/');
@@ -49,12 +54,11 @@ export default function DetailPage() {
     await createReview(review, params.id);
 
     setReview('');
-    
+
     fetchAndSetCallback();
     
   }
 
-  // console.log(reviews);
 
   return (
     <div className='detail-page'>
@@ -73,9 +77,13 @@ export default function DetailPage() {
         >URL: {equipmentItem.url}</h4>
       </div>
       <button
+        //prevent update if its not the logged in users item
+        disabled={userObj.currentSession.user.id !== equipmentItem.user_id}
         onClick={handleUpdate}
       >Update this entry</button>
       <button
+        //prevent delete if its not the logged in users item
+        disabled={userObj.currentSession.user.id !== equipmentItem.user_id}
         onClick={handleDelete}
       >Delete this entry</button>
       {/* REVIEW STRETCH */}

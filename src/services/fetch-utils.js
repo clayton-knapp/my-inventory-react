@@ -55,6 +55,15 @@ export async function createReview(review, id) {
   return checkError(response);
 }
 
+export async function deleteReviewsForAnItem(id) {
+  const response = await client
+    .from('reviews')
+    .delete()
+    .match({ equipment_id: id });
+
+  return checkError(response);
+}
+
 
 
 //AUTH STUFF
