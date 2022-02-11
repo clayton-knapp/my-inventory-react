@@ -18,7 +18,7 @@ import { logout } from './services/fetch-utils';
 
 function App() {
   //store user in state
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('supabase.auth.token'));
 
   //grab user from localStorage token on load
   useEffect(() => {
@@ -36,12 +36,15 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h2>Equipment Inventory</h2>
+        <h2>Equipment Inventory App</h2>
         <header>
           {
-            user && <ul>
-              <li style={{ listStyle: 'none' }}>
-                <NavLink to=''>List Page</NavLink>
+            user && <ul style={{ listStyle: 'none' }}>
+              <li>
+                <NavLink to='/'>List Page</NavLink>
+              </li>
+              <li>
+                <NavLink to='/create'>Create Page</NavLink>
               </li>
               <button
                 onClick={handleLogout}

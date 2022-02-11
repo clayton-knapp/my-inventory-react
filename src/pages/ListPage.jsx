@@ -15,7 +15,6 @@ export default function ListPage() {
     }
 
     fetchAndSetList();
-    console.log(equipmentList);
   }, []);
   
 
@@ -23,7 +22,7 @@ export default function ListPage() {
 
   return (
     <div className='list-page'>
-      <h2>List Page</h2>
+      <h2>Equipment List:</h2>
       <div className='list-container'>
         {
           equipmentList.map((equipment, i)=>

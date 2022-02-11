@@ -66,6 +66,7 @@
   border: 1px solid black;
   border-radius: 10px;
   width: 200px;
+  margin: 10px;
 }
 
 .list-container {
@@ -73,4 +74,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.create-form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+
+.create-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-form button {
+  width: 200px;
 }

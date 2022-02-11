@@ -8,6 +8,14 @@ export async function fetchEquipmentList() {
   return checkError(response);
 }
 
+export async function createEquipment(equipment) {
+  const response = await client
+    .from('equipment')
+    .insert(equipment);
+
+  return checkError(response);
+}
+
 
 
 
