@@ -11,14 +11,12 @@ export default function AuthPage({ setUser }) {
   async function handleSignInSubmit(e) {
     e.preventDefault();
     const user = await signInUser(emailForm, passwordForm);
-    console.log(user);
     setUser(user);
   }
 
 
   async function handleSignUpClick(){
     const user = await signUpUser(emailForm, passwordForm);
-    console.log(user);
     setUser(user);
   }
 
