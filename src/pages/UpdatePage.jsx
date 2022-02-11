@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
-import { updateEquipment } from '../services/fetch-utils';
+import { useState, useEffect } from 'react';
+import { updateEquipment, fetchSingleEquipmentItem } from '../services/fetch-utils';
 import { useHistory, useParams } from 'react-router-dom';
 import Form from '../components/Form';
 
@@ -20,6 +20,29 @@ export default function UpdatePage() {
   const [purchaseDate, setPurchaseDate] = useState('');
   const [purchasedFrom, setPurchasedFrom] = useState('');
   const [url, setUrl] = useState('');
+
+  //on load fetch the data for this item and set to state
+  useEffect(() => {
+    async function fetchAndSetEquipmentItem() {
+      const equipmentItem = await fetchSingleEquipmentItem(params.id);
+      setName(equipmentItem.name);
+      setMake(equipmentItem.make);
+      setModel(equipmentItem.model);
+      setCategory(equipmentItem.category);
+      setModifications(equipmentItem.modifications);
+      setYear(equipmentItem.year);
+      setSerial(equipmentItem.serial);
+      setReplacementValue(equipmentItem.replacement_value);
+      setPurchasePrice(equipmentItem.purchase_price);
+      setPurchaseDate(equipmentItem.purchase_date);
+      setPurchasedFrom(equipmentItem.purchased_from);
+      setUrl(equipmentItem.url);
+
+      // console.log(equipmentItem);
+    }
+    fetchAndSetEquipmentItem();
+  }, [params.id]);
+  
 
   async function handleCreateSubmit(e) {
     e.preventDefault();
@@ -41,7 +64,7 @@ export default function UpdatePage() {
 
     await updateEquipment(equipment, params.id);
 
-    // history.replace('/');
+    history.replace('/');
 
   }
 

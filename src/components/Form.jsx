@@ -1,31 +1,31 @@
 import React from 'react';
 
-export default function Form({ handleSubmit, setName, setMake, setModel, setCategory, setModifications, setYear, setSerial, setReplacementValue, setPurchasePrice, setPurchaseDate, setPurchasedFrom, setUrl }) {
+export default function Form({ handleSubmit, setName, setMake, setModel, setCategory, setModifications, setYear, setSerial, setReplacementValue, setPurchasePrice, setPurchaseDate, setPurchasedFrom, setUrl, name, make, model, category, modifications, year, serial, replacementValue, purchasePrice, purchaseDate, purchasedFrom, url }) {
   return (
     <form className='create-form'
       onSubmit={handleSubmit}
     >
       <label>
           Name/Description: 
-        <input required
+        <input required value={name}
           onChange={(e)=> setName(e.target.value)}
         ></input>
       </label>
       <label>
           Make/Manufacturer: 
-        <input
+        <input value={make}
           onChange={(e)=> setMake(e.target.value)}
         ></input>
       </label>
       <label>
           Model: 
-        <input
+        <input value={model}
           onChange={(e)=> setModel(e.target.value)}
         ></input>
       </label>
       <label>
           Category: 
-        <select
+        <select value={category}
           onChange={(e)=> setCategory(e.target.value)}
         >
           <option value="Computer">Computer</option>
@@ -50,49 +50,49 @@ export default function Form({ handleSubmit, setName, setMake, setModel, setCate
       </label>
       <label>
           Modifications: 
-        <textarea
+        <textarea value={modifications}
           onChange={(e)=> setModifications(e.target.value)}
         ></textarea>
       </label>
       <label>
           Year: 
-        <input type='number'
+        <input type='number' value={year}
           onChange={(e)=> setYear(e.target.value)}
         ></input>
       </label>
       <label>
           Serial: 
-        <input
+        <input value={serial}
           onChange={(e)=> setSerial(e.target.value)}
         ></input>
       </label>
       <label>
           Replacement Value: 
-        <input type='number'
+        <input type='number' value={replacementValue}
           onChange={(e)=> setReplacementValue(e.target.value)}
         ></input>
       </label>
       <label>
           Purchase Price: 
-        <input type='number'
+        <input type='number' value={purchasePrice}
           onChange={(e)=> setPurchasePrice(e.target.value)}
         ></input>
       </label>
       <label>
           Purchase Date: 
-        <input type='date'
+        <input type='date' value={purchaseDate}
           onChange={(e)=> setPurchaseDate(e.target.value)}
         ></input>
       </label>
       <label>
           Purhased From/Seller: 
-        <input
+        <input value={purchasedFrom}
           onChange={(e)=> setPurchasedFrom(e.target.value)}
         ></input>
       </label>
       <label>
           URL: 
-        <input type='url'
+        <input type='url' value={url}
           onChange={(e)=> setUrl(e.target.value)}
         ></input>
       </label>
