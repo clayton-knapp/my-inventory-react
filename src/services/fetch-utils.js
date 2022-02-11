@@ -19,7 +19,7 @@ export async function createEquipment(equipment) {
 export async function fetchSingleEquipmentItem(id) {
   const response = await client
     .from('equipment')
-    .select()
+    .select(`*, reviews (*)`)
     .match({ id: id })
     .single();
 
@@ -44,6 +44,25 @@ export async function updateEquipment(equipmentItem, id) {
   return checkError(response);
 }
 
+export async function createReview(review, id) {
+  const response = await client
+    .from('reviews')
+    .insert({ 
+      review: review,
+      equipment_id: id
+    });
+
+  return checkError(response);
+}
+
+export async function deleteReviewsForAnItem(id) {
+  const response = await client
+    .from('reviews')
+    .delete()
+    .match({ equipment_id: id });
+
+  return checkError(response);
+}
 
 
 
