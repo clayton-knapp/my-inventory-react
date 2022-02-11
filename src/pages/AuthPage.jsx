@@ -1,15 +1,25 @@
 import React from 'react';
 import '../App.css';
+import { useState } from 'react';
+import { signUpUser, signInUser } from '../services/fetch-utils';
 
-export default function AuthPage() {
+export default function AuthPage({ setUser }) {
+  //track State of email and password
+  const [emailForm, setEmailForm] = useState('');
+  const [passwordForm, setPasswordForm] = useState('');
 
-  function handleSignInSubmit(e) {
-
+  async function handleSignInSubmit(e) {
+    e.preventDefault();
+    const user = await signInUser(emailForm, passwordForm);
+    console.log(user);
+    setUser(user);
   }
 
 
-  function handleSignUpClick(){
-
+  async function handleSignUpClick(){
+    const user = await signUpUser(emailForm, passwordForm);
+    console.log(user);
+    setUser(user);
   }
 
   return (
@@ -21,14 +31,14 @@ export default function AuthPage() {
         >
           <label>
             Email: 
-            <input
-              // onChange={(e)=>setEmailForm(e.target.value)}
+            <input required type='email'
+              onChange={(e)=>setEmailForm(e.target.value)}
             ></input>
           </label>
           <label>
             Password: 
-            <input
-              // onChange={(e)=>setEmailForm(e.target.value)}
+            <input required type='password'
+              onChange={(e)=>setPasswordForm(e.target.value)}
             ></input>
           </label>
           <button>Sign-In</button>

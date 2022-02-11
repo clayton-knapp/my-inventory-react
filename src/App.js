@@ -5,7 +5,7 @@ import {
   Switch, 
   Link,
   NavLink,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import AuthPage from './pages/AuthPage';
@@ -13,6 +13,7 @@ import ListPage from './pages/ListPage';
 import CreatePage from './pages/CreatePage';
 import UpdatePage from './pages/UpdatePage';
 import DetailPage from './pages/DetailPage';
+import { logout } from './services/fetch-utils';
 
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
   }, []);
   
 
-  function handleLogout() {
-
+  async function handleLogout() {
+    await logout();
+    setUser(null);
   }
 
 
@@ -39,7 +41,7 @@ function App() {
           {
             user && <ul>
               <li>
-                <Link to=''>List Page</Link>
+                <NavLink to=''>List Page</NavLink>
               </li>
               <button
                 onClick={handleLogout}
