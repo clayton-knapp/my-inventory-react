@@ -1,5 +1,19 @@
 import { client } from './client';
 
+export async function fetchEquipmentList() {
+  const response = await client
+    .from('equipment')
+    .select();
+
+  return checkError(response);
+}
+
+
+
+
+
+
+
 //AUTH STUFF
 
 // export async function getUser() {

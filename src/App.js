@@ -40,7 +40,7 @@ function App() {
         <header>
           {
             user && <ul>
-              <li>
+              <li style={{ listStyle: 'none' }}>
                 <NavLink to=''>List Page</NavLink>
               </li>
               <button
