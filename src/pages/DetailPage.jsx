@@ -1,21 +1,33 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { fetchSingleEquipmentItem, deleteEquipment } from '../services/fetch-utils';
+import { useEffect, useState, useCallback } from 'react';
+import { fetchSingleEquipmentItem, deleteEquipment, createReview } from '../services/fetch-utils';
+import Review from '../components/Review';
 
 export default function DetailPage() {
   const params = useParams();
   const history = useHistory();
 
   const [equipmentItem, setEquipmentItem] = useState('');
+  const [review, setReview] = useState('');
+  const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
+
+  const fetchAndSetCallback = useCallback(
     async function fetchAndSetEquipmentItem() {
       const equipmentItem = await fetchSingleEquipmentItem(params.id);
       setEquipmentItem(equipmentItem);
-    }
-    fetchAndSetEquipmentItem();
-  }, [params.id]);
+      setReviews(equipmentItem.reviews);
+      // console.log(reviews);
+      // console.log(equipmentItem);
+    },
+    [params.id],
+  );
+  
+
+  useEffect(() => {
+    fetchAndSetCallback();
+  }, [fetchAndSetCallback]);
   
 
   function handleURLClick() {
@@ -31,6 +43,18 @@ export default function DetailPage() {
   function handleUpdate() {
     history.push(`/update/${params.id}`);
   }
+
+  async function handleSubmitReview(e) {
+    e.preventDefault();
+    await createReview(review, params.id);
+
+    setReview('');
+    
+    fetchAndSetCallback();
+    
+  }
+
+  // console.log(reviews);
 
   return (
     <div className='detail-page'>
@@ -54,6 +78,29 @@ export default function DetailPage() {
       <button
         onClick={handleDelete}
       >Delete this entry</button>
+      {/* REVIEW STRETCH */}
+      <div className='review-container'>
+        <h2>Leave a review:</h2>
+        <form action=""
+          onSubmit={handleSubmitReview}
+        >
+          <label htmlFor="">
+            <textarea name="" id="" cols="30" rows="10" value={review}
+              onChange={(e)=> setReview(e.target.value)}
+            ></textarea>
+          </label>
+          <button>Submit Review</button>
+        </form>
+        <h2>Reviews:</h2>
+        {
+          reviews.map((review, i) =>
+            <Review 
+              key={review + i}
+              review={review}
+            />
+          )
+        }
+      </div>
     </div>
   );
 }
