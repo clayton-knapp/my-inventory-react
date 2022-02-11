@@ -13,11 +13,8 @@ export default function DetailPage() {
     async function fetchAndSetEquipmentItem() {
       const equipmentItem = await fetchSingleEquipmentItem(params.id);
       setEquipmentItem(equipmentItem);
-
     }
-
     fetchAndSetEquipmentItem();
-
   }, [params.id]);
   
 
@@ -29,8 +26,10 @@ export default function DetailPage() {
     await deleteEquipment(params.id);
 
     history.push('/');
+  }
 
-
+  function handleUpdate() {
+    history.push(`/update/${params.id}`);
   }
 
   return (
@@ -49,12 +48,12 @@ export default function DetailPage() {
           onClick={handleURLClick}
         >URL: {equipmentItem.url}</h4>
       </div>
-      <button>Update this entry</button>
+      <button
+        onClick={handleUpdate}
+      >Update this entry</button>
       <button
         onClick={handleDelete}
       >Delete this entry</button>
-
-
     </div>
   );
 }

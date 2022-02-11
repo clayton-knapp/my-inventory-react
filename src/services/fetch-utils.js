@@ -35,6 +35,14 @@ export async function deleteEquipment(id) {
   return checkError(response);
 }
 
+export async function updateEquipment(equipmentItem, id) {
+  const response = await client
+    .from('equipment')
+    .update(equipmentItem)
+    .match({ id: id });
+
+  return checkError(response);
+}
 
 
 
