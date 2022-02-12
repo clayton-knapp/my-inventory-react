@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
-import { fetchSingleEquipmentItem, deleteEquipment, createReview, deleteReviewsForAnItem } from '../services/fetch-utils';
+import { deleteEquipment, createReview, deleteReviewsForAnItem, fetchSingleEquipmentItemAndReviews } from '../services/fetch-utils';
 import Review from '../components/Review';
 
 export default function DetailPage({ user }) {
@@ -14,15 +14,12 @@ export default function DetailPage({ user }) {
 
   const [equipmentItem, setEquipmentItem] = useState('');
   const [review, setReview] = useState('');
-  const [reviews, setReviews] = useState([]);
 
 
   const fetchAndSetCallback = useCallback(
-    async function fetchAndSetEquipmentItem() {
-      const equipmentItem = await fetchSingleEquipmentItem(params.id);
+    async function fetchAndSetEquipmentItemAndReviews() {
+      const equipmentItem = await fetchSingleEquipmentItemAndReviews(params.id);
       setEquipmentItem(equipmentItem);
-      setReviews(equipmentItem.reviews);
-      // console.log(reviews);
       // console.log(equipmentItem);
     },
     [params.id],
@@ -66,10 +63,10 @@ export default function DetailPage({ user }) {
         <h2>{equipmentItem.name}</h2>
         <h3>{equipmentItem.make} {equipmentItem.model}</h3>
         <h3>Category: {equipmentItem.category}</h3>
-        <h3>Year: {equipmentItem.year} Serial: {equipmentItem.year}</h3>
+        <h3>Year: {equipmentItem.year} Serial: {equipmentItem.serial}</h3>
         <p>Modifications: {equipmentItem.modifications}</p>
         <h3>Replacement Value: ${equipmentItem.replacement_value}</h3>
-        <h3>Purchase Price: ${equipmentItem.replacement_value}</h3>
+        <h3>Purchase Price: ${equipmentItem.purchase_price}</h3>
         <h4>Purchase Date: {equipmentItem.purchase_date}</h4>
         <h4>Purchased From/Seller: {equipmentItem.purchased_from}</h4>
         <h4 className='url'
@@ -101,7 +98,9 @@ export default function DetailPage({ user }) {
         </form>
         <h2>Reviews:</h2>
         {
-          reviews.map((review, i) =>
+          // console.log(equipmentItem.reviews)
+          (equipmentItem.reviews) &&
+          equipmentItem.reviews.map((review, i) =>
             <Review 
               key={review + i}
               review={review}

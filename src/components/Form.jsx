@@ -1,32 +1,36 @@
 import React from 'react';
 
-export default function Form({ handleSubmit, setName, setMake, setModel, setCategory, setModifications, setYear, setSerial, setReplacementValue, setPurchasePrice, setPurchaseDate, setPurchasedFrom, setUrl, name, make, model, category, modifications, year, serial, replacementValue, purchasePrice, purchaseDate, purchasedFrom, url }) {
+export default function Form({ handleSubmit, setFormData, formData }) {
   return (
     <form className='create-form'
       onSubmit={handleSubmit}
     >
       <label>
           Name/Description: 
-        <input required value={name}
-          onChange={(e)=> setName(e.target.value)}
+        <input required 
+          value={formData.name}
+          onChange={(e)=> setFormData({ ...formData, name: e.target.value })}
         ></input>
       </label>
       <label>
           Make/Manufacturer: 
-        <input value={make}
-          onChange={(e)=> setMake(e.target.value)}
+        <input 
+          value={(formData) && formData.make}
+          onChange={(e)=> setFormData({ ...formData, make: e.target.value })}
         ></input>
       </label>
       <label>
           Model: 
-        <input value={model}
-          onChange={(e)=> setModel(e.target.value)}
+        <input 
+          value={(formData) && formData.model}
+          onChange={(e)=> setFormData({ ...formData, model: e.target.value })}
         ></input>
       </label>
       <label>
           Category: 
-        <select value={category}
-          onChange={(e)=> setCategory(e.target.value)}
+        <select 
+          value={(formData) && formData.category}
+          onChange={(e)=> setFormData({ ...formData, category: e.target.value })}
         >
           <option value="Computer">Computer</option>
           <option value="Recorder">Recorder</option>
@@ -50,50 +54,58 @@ export default function Form({ handleSubmit, setName, setMake, setModel, setCate
       </label>
       <label>
           Modifications: 
-        <textarea value={modifications}
-          onChange={(e)=> setModifications(e.target.value)}
+        <textarea 
+          value={(formData) && formData.modifications}
+          onChange={(e)=> setFormData({ ...formData, modifications: e.target.value })}
         ></textarea>
       </label>
       <label>
           Year: 
-        <input type='number' value={year}
-          onChange={(e)=> setYear(e.target.value)}
+        <input type='number' 
+          value={(formData) && formData.year}
+          onChange={(e)=> setFormData({ ...formData, year: e.target.value })}
         ></input>
       </label>
       <label>
           Serial: 
-        <input value={serial}
-          onChange={(e)=> setSerial(e.target.value)}
+        <input 
+          value={(formData) && formData.serial}
+          onChange={(e)=> setFormData({ ...formData, serial: e.target.value })}
         ></input>
       </label>
       <label>
           Replacement Value: 
-        <input type='number' value={replacementValue}
-          onChange={(e)=> setReplacementValue(e.target.value)}
+        <input type='number' 
+          value={(formData) && formData.replacement_value}
+          onChange={(e)=> setFormData({ ...formData, replacement_value: e.target.value })}
         ></input>
       </label>
       <label>
           Purchase Price: 
-        <input type='number' value={purchasePrice}
-          onChange={(e)=> setPurchasePrice(e.target.value)}
+        <input type='number' 
+          value={(formData) && formData.purchase_price}
+          onChange={(e)=> setFormData({ ...formData, purchase_price: e.target.value })}
         ></input>
       </label>
       <label>
           Purchase Date: 
-        <input type='date' value={purchaseDate}
-          onChange={(e)=> setPurchaseDate(e.target.value)}
+        <input type='date' 
+          value={(formData) && formData.purchase_date}
+          onChange={(e)=> setFormData({ ...formData, purchase_date: e.target.value })}
         ></input>
       </label>
       <label>
           Purhased From/Seller: 
-        <input value={purchasedFrom}
-          onChange={(e)=> setPurchasedFrom(e.target.value)}
+        <input 
+          value={(formData) && formData.purchased_from}
+          onChange={(e)=> setFormData({ ...formData, purchased_from: e.target.value })}
         ></input>
       </label>
       <label>
           URL: 
-        <input type='url' value={url}
-          onChange={(e)=> setUrl(e.target.value)}
+        <input type='url' 
+          value={(formData) && formData.url}
+          onChange={(e)=> setFormData({ ...formData, url: e.target.value })}
         ></input>
       </label>
       <br></br>

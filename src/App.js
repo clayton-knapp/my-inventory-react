@@ -6,7 +6,10 @@ import {
   NavLink,
   Redirect,
 } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { 
+  useState, 
+  // useEffect
+} from 'react';
 import AuthPage from './pages/AuthPage';
 import ListPage from './pages/ListPage';
 import CreatePage from './pages/CreatePage';
@@ -20,10 +23,10 @@ function App() {
   const [user, setUser] = useState(localStorage.getItem('supabase.auth.token'));
 
   //grab user from localStorage token on load
-  useEffect(() => {
-    const user = localStorage.getItem('supabase.auth.token');
-    setUser(user);
-  }, []);
+  // useEffect(() => {
+  //   const user = localStorage.getItem('supabase.auth.token');
+  //   setUser(user);
+  // }, []);
   
 
   async function handleLogout() {

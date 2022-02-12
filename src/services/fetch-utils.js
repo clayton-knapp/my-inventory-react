@@ -16,7 +16,7 @@ export async function createEquipment(equipment) {
   return checkError(response);
 }
 
-export async function fetchSingleEquipmentItem(id) {
+export async function fetchSingleEquipmentItemAndReviews(id) {
   const response = await client
     .from('equipment')
     .select(`*, reviews (*)`)
